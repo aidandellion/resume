@@ -1,0 +1,88 @@
+:root { --ink:#000; --link:#0563c1; --desk:#e4e4e4; }
+
+* { box-sizing: border-box; }
+html, body { margin:0; }
+body {
+  background: var(--desk);
+  padding: 20px 12px 90px;
+  font-family: "Tinos", "Times New Roman", Times, serif;
+  color: var(--ink);
+}
+
+/* ---- paper (US Letter @ 96dpi = 816 x 1056) ---- */
+#stage { margin: 0 auto; }
+#stack { width: 816px; transform-origin: top left; }
+
+.page {
+  width: 816px; height: 1056px;
+  padding: 48px 48px 0;
+  background: #fff;
+  box-shadow: 0 2px 14px rgba(0,0,0,.28);
+  margin-bottom: 20px;
+  overflow: hidden;
+  font-size: 14.67px;          /* 11pt */
+  line-height: 1.17;
+}
+
+header { text-align: center; margin-bottom: 38px; }
+h1 { margin: 0; font-size: 26.7px; line-height: 1.2; font-weight: 700; letter-spacing: 0; }
+.contact { margin: 0; }
+
+h2 {
+  margin: 34px 0 10px;
+  padding-bottom: 1px;
+  font-size: 16px; line-height: 1.2; font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1.2px solid #000;
+}
+h2.first { margin-top: 0; }
+
+p { margin: 0 0 14px; }
+.justify { text-align: justify; }
+.skill { margin-bottom: 17px; }
+
+.entry { margin-bottom: 17px; }
+.entry.tight { margin-bottom: 16px; }
+.row { display: flex; justify-content: space-between; gap: 12px; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+li { position: relative; padding-left: 24px; }
+li::before {
+  content: ""; position: absolute; left: 3px; top: .55em;
+  width: 5.5px; height: 5.5px; border-radius: 50%; background: #000;
+}
+li.j { text-align: justify; }
+
+a { color: var(--link); text-decoration: underline; }
+
+/* ---- toolbar ---- */
+#toolbar {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+  display: flex; gap: 6px; align-items: center;
+  padding: 6px; border-radius: 999px;
+  background: rgba(30,30,30,.92);
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  z-index: 10;
+}
+#toolbar button, #toolbar a {
+  border: 0; border-radius: 999px; cursor: pointer;
+  padding: 8px 14px; min-width: 40px;
+  background: transparent; color: #fff;
+  font: 500 14px/1 system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  text-decoration: none; white-space: nowrap;
+}
+#toolbar button:hover, #toolbar a:hover { background: rgba(255,255,255,.16); }
+#toolbar a { background: #fff; color: #111; }
+#toolbar a:hover { background: #e8e8e8; }
+
+/* ---- print: clean PDF that matches the site ---- */
+@page { size: Letter; margin: 0; }
+@media print {
+  body { background: #fff; padding: 0; }
+  #toolbar { display: none; }
+  #stage { width: auto !important; height: auto !important; }
+  #stack { transform: none !important; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; break-after: page; }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+}
